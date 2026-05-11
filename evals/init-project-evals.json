@@ -1,0 +1,36 @@
+{
+  "name": "init-project decisions scaffolding evals",
+  "command": "/init-project",
+  "tests": [
+    {
+      "name": "scaffolds docs/decisions/ on first run",
+      "input": "",
+      "setup": [
+        "rm -rf docs/decisions"
+      ],
+      "expects": [
+        "creates docs/decisions/0000-template.md",
+        "creates docs/decisions/INDEX.md",
+        "creates docs/decisions/README.md",
+        "INDEX.md frontmatter status is template",
+        "INDEX.md adr_count is 0",
+        "creates canonical labels via gh label commands (8 canonical labels created)",
+        "configures branch protection on main and develop",
+        "generates cloud-agnostic .env.infra"
+      ]
+    },
+    {
+      "name": "preserves edited INDEX.md on re-run when status != template",
+      "input": "",
+      "setup": [
+        "mkdir -p docs/decisions",
+        "cp templates/decisions/INDEX.md docs/decisions/INDEX.md",
+        "sed -i.bak 's/^status: template/status: reviewed/' docs/decisions/INDEX.md && rm docs/decisions/INDEX.md.bak"
+      ],
+      "expects": [
+        "prompts user before overwriting",
+        "respects user choice (does not silently clobber)"
+      ]
+    }
+  ]
+}

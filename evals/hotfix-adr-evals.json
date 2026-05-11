@@ -1,0 +1,28 @@
+{
+  "name": "hotfix ADR awareness evals",
+  "command": "/hotfix",
+  "tests": [
+    {
+      "name": "loads INDEX before implementation (Step 6.5)",
+      "input": "",
+      "setup": [
+        "mkdir -p docs/decisions",
+        "echo 'mock INDEX' > docs/decisions/INDEX.md"
+      ],
+      "expects": [
+        "Step 6.5 reads docs/decisions/INDEX.md",
+        "references commands/_shared/load-decisions.md"
+      ]
+    },
+    {
+      "name": "emits ADR with hotfix tag when architectural decision forced (Step 13.5)",
+      "input": "",
+      "expects": [
+        "Step 13.5 invokes precondition guard",
+        "creates new ADR with tags: [hotfix, ...]",
+        "Context section mentions emergency conditions",
+        "runs /compress-decisions"
+      ]
+    }
+  ]
+}

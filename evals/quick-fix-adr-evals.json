@@ -1,0 +1,19 @@
+{
+  "name": "quick-fix ADR awareness evals",
+  "command": "/quick-fix",
+  "tests": [
+    {
+      "name": "loads INDEX before implementation (Step 6.5)",
+      "input": "",
+      "setup": [
+        "mkdir -p docs/decisions",
+        "echo 'mock INDEX' > docs/decisions/INDEX.md"
+      ],
+      "expects": [
+        "Step 6.5 reads docs/decisions/INDEX.md",
+        "references commands/_shared/load-decisions.md",
+        "does NOT open full ADR files"
+      ]
+    }
+  ]
+}

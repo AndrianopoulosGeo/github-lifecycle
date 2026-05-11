@@ -1,0 +1,35 @@
+{
+  "name": "decision command evals",
+  "command": "/decision",
+  "tests": [
+    {
+      "name": "new ADR creates file with correct numbering",
+      "input": "new \"Adopt Tailwind v4\"",
+      "setup": ["mkdir -p docs/decisions"],
+      "expects": [
+        "creates file matching docs/decisions/0001-adopt-tailwind-v4.md",
+        "file frontmatter contains status: accepted",
+        "INDEX.md is regenerated"
+      ]
+    },
+    {
+      "name": "supersede marks old ADR superseded and links new one",
+      "input": "supersede 1 \"Adopt Tailwind v5\"",
+      "setup": [
+        "mkdir -p docs/decisions",
+        "echo '---\\nstatus: accepted\\n---\\n# ADR-0001' > docs/decisions/0001-tailwind-v4.md"
+      ],
+      "expects": [
+        "old ADR has superseded_by: 0002 in frontmatter",
+        "old ADR has status: superseded",
+        "new ADR has supersedes: 0001"
+      ]
+    },
+    {
+      "name": "list reads INDEX.md if present",
+      "input": "list",
+      "setup": ["echo '# ADR Index' > docs/decisions/INDEX.md"],
+      "expects": ["prints INDEX.md contents"]
+    }
+  ]
+}

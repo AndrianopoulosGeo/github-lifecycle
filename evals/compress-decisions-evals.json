@@ -1,0 +1,26 @@
+{
+  "name": "compress-decisions command evals",
+  "command": "/compress-decisions",
+  "tests": [
+    {
+      "name": "regenerates INDEX with one row per ADR",
+      "input": "",
+      "setup": [
+        "mkdir -p docs/decisions",
+        "echo '---\\ntitle: ADR-0001\\nstatus: accepted\\ndate: 2026-01-01\\ntags: [test]\\n---\\n## Decision\\nWe adopt Tailwind.' > docs/decisions/0001-tailwind.md"
+      ],
+      "expects": [
+        "INDEX.md contains row for ADR-0001",
+        "INDEX.md adr_count frontmatter = 1"
+      ]
+    },
+    {
+      "name": "--check prints diff and does NOT write",
+      "input": "--check",
+      "expects": [
+        "prints unified diff",
+        "INDEX.md is unchanged"
+      ]
+    }
+  ]
+}

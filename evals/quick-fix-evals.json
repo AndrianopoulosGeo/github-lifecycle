@@ -1,0 +1,31 @@
+{
+  "skill_name": "quick-fix",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Run /quick-fix fix the typo in the homepage hero section title",
+      "expected_output": "Creates GitHub Issue, branches from develop, fixes the typo with tests, merges back to develop, updates .state.md",
+      "expectations": [
+        "Creates a GitHub Issue via gh issue create --label type:quickfix",
+        "Creates a branch from develop with naming pattern fix/<issue-number>-<description>",
+        "Reads .env.claude for GitHub configuration, not .env",
+        "Implements the fix with at least one test",
+        "Runs the test suite before merging",
+        "Creates PR via gh pr create --base develop and merges the fix branch back to develop",
+        "Updates .state.md with track=quick-fix and next_command=/staging",
+        "Commit message follows Conventional Commits format",
+        "Commit message does NOT include Co-Authored-By or AI attribution"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Run /quick-fix without any description",
+      "expected_output": "Asks the user what needs to be fixed before proceeding",
+      "expectations": [
+        "Does not create an issue without a description",
+        "Asks the user to describe the issue",
+        "Does not branch or start implementing without user input"
+      ]
+    }
+  ]
+}
