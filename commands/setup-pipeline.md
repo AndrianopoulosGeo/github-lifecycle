@@ -88,11 +88,20 @@ EOF
 
 ```bash
 gh api --method PUT "repos/${GITHUB_OWNER}/${GITHUB_REPO}/environments/staging" >/dev/null
-gh api --method PUT "repos/${GITHUB_OWNER}/${GITHUB_REPO}/environments/production" \
-  -f 'reviewers[][type]=User' \
-  -f "reviewers[][id]=$(gh api user -q .id)" >/dev/null
+
+# Attempt to set required-reviewer on production (requires GitHub Pro/Team/Enterprise or a public repo).
+# On free private repos this returns HTTP 422 — we create the environment without the reviewer rule and warn.
+USER_ID="$(gh api user -q '.id')"
+if ! gh api --method PUT "repos/${GITHUB_OWNER}/${GITHUB_REPO}/environments/production" \
+     --input - <<EOF 2>/dev/null
+{"reviewers":[{"type":"User","id":$USER_ID}]}
+EOF
+then
+  gh api --method PUT "repos/${GITHUB_OWNER}/${GITHUB_REPO}/environments/production" >/dev/null
+  echo "⚠ Production environment created WITHOUT required-reviewer rule (upgrade to GitHub Pro/Team/Enterprise or use a public repo to enable approval gates)."
+fi
 ```
 
-(For team-based approval, the user can later edit the environment to add a team reviewer; this stub seeds the repo owner as the default approver.)
+(For team-based approval, the user can later edit the environment to add a team reviewer; this stub seeds the repo owner as the default approver when the plan allows it.)
 
 8. Print a summary: `"Wrote ci.yml, deploy-staging.yml, deploy-prod.yml. Created staging + production environments. Fill in TODO markers per your cloud."`

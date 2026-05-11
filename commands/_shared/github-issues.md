@@ -41,14 +41,14 @@ create_sub_issue() {
     --label "type:task" \
     | sed -E 's#.*/([0-9]+)$#\1#')"
 
-  # 2) Resolve sub-issue's node ID
-  local sub_node_id
-  sub_node_id="$(gh api "repos/${GITHUB_OWNER}/${GITHUB_REPO}/issues/${sub_number}" -q .node_id)"
+  # 2) Resolve sub-issue's integer database ID (the REST endpoint requires an integer, not a node_id)
+  local sub_int_id
+  sub_int_id="$(gh api "repos/${GITHUB_OWNER}/${GITHUB_REPO}/issues/${sub_number}" -q .id)"
 
   # 3) Link as sub-issue of parent via REST
   gh api --method POST \
     "repos/${GITHUB_OWNER}/${GITHUB_REPO}/issues/${parent}/sub_issues" \
-    -f sub_issue_id="$sub_node_id" >/dev/null
+    -F sub_issue_id="$sub_int_id" >/dev/null
 
   echo "$sub_number"
 }

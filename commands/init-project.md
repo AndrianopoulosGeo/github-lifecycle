@@ -195,7 +195,7 @@ for branch in main develop; do
     -F enforce_admins=true \
     -F restrictions=null \
   && echo "[DONE] Branch protection set on ${branch}" \
-  || echo "[WARN] Could not set branch protection on ${branch} — you may need admin rights"
+  || echo "[WARN] Could not set branch protection on ${branch} — requires admin rights AND (GitHub Pro/Team/Enterprise or a public repo)"
 done
 ```
 
