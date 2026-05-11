@@ -1,0 +1,16 @@
+# Environment files with secrets
+.env.claude
+.env
+.env.*
+!.env.claude.example
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.claude/settings.local.json

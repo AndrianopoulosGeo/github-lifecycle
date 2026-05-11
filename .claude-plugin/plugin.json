@@ -1,0 +1,12 @@
+{
+  "name": "github-lifecycle",
+  "description": "Full development lifecycle automation with GitHub — feature planning, TDD, staging, release, hotfix, docs and ADRs with Gitflow (main+develop)",
+  "version": "1.0.0",
+  "author": {
+    "name": "AndrianopoulosGeo",
+    "email": "andrianopoulos.ge@gmail.com"
+  },
+  "repository": "https://github.com/AndrianopoulosGeo/github-lifecycle",
+  "license": "MIT",
+  "keywords": ["github", "gitflow", "lifecycle", "ci-cd", "tdd", "adr"]
+}
