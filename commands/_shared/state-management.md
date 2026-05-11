@@ -1,16 +1,34 @@
 ## State Management (source this in every lifecycle command)
 
+## .state.md template format
+
+This is the canonical shape every lifecycle command MUST emit when writing `.state.md`. Do not use multi-line YAML or nested keys — every field is a flat `key: value` on its own line.
+
+```
+# github-lifecycle workflow state
+# Edit via /feature, /develop, /quick-fix, /hotfix — do not hand-edit
+
+track: <feature|quick-fix|hotfix|idle>
+step: <feature|develop|quick-fix|hotfix|staging|release|idle>
+status: <idle|in-progress|blocked|awaiting-review|ready-to-promote>
+issue: <number or empty>
+branch: <current branch or empty>
+
+## History
+- [YYYY-MM-DD HH:MM] /command — status: result (brief summary)
+```
+
 ### Reading State
 
 At the START of every lifecycle command (`/feature`, `/develop`, `/quick-fix`, `/hotfix`, `/staging`, `/release`):
 
 1. Check if `.state.md` exists at the repository root
-2. If it exists, read the current state:
+2. If it exists, read the current state using flat one-line key:value greps:
    ```bash
-   # Quick state check
-   grep -A1 "track" .state.md | tail -1 | awk '{print $NF}'
-   grep -A1 "step" .state.md | tail -1 | awk '{print $NF}'
-   grep -A1 "status" .state.md | tail -1 | awk '{print $NF}'
+   # Quick state check (flat one-line format)
+   awk -F': *' '/^track:/{print $2; exit}'  .state.md
+   awk -F': *' '/^step:/{print $2; exit}'   .state.md
+   awk -F': *' '/^status:/{print $2; exit}' .state.md
    ```
 3. If the state shows a different track is in progress, WARN the user:
    > "There's already a [track] in progress on branch [branch] (issue #[id]). Do you want to continue that work, or start fresh?"
