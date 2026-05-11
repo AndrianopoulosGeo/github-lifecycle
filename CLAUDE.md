@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What This Is
 
-A Claude Code plugin (`github-lifecycle`) that provides 15 slash commands for full development lifecycle automation with GitHub and Gitflow branching. Distributed via a custom marketplace (`AndrianopoulosGeo/claude-marketplace`).
+A Claude Code plugin (`github-lifecycle`) that provides 17 slash commands for full development lifecycle automation with GitHub and Gitflow branching. Distributed via a custom marketplace (`AndrianopoulosGeo/claude-marketplace`).
 
 ## Architecture
 
@@ -44,7 +44,7 @@ Commands delegate to each other and to external plugins:
 | `/feature` | `superpowers:brainstorming`, `superpowers:writing-plans` |
 | `/next` | Reads `.state.md` and invokes the appropriate next command |
 | `/setup-infra` | (standalone — cloud-agnostic stub) |
-| `/setup-pipeline` | `/setup-infra` for `.env.infra`, Playwright (fallback for approval gate) |
+| `/setup-pipeline` | `/setup-infra` for `.env.infra`; generates GitHub Actions workflow stubs with approval gates configured via environment reviewers |
 | `/feature`, `/develop`, `/quick-fix`, `/hotfix` | `commands/_shared/load-decisions.md` for ADR context |
 | `/feature`, `/develop`, `/hotfix` | `/compress-decisions` after emitting an ADR |
 | `/decision` | `/compress-decisions` after every operation |
@@ -93,9 +93,10 @@ Lifecycle commands read/write `.state.md` to track workflow progress. Status val
 
 ### Architecture Decisions (ADRs)
 
-ADRs live at `docs/decisions/<NNNN>-<slug>.md` inside the **/docs folder**
-(so they auto-publish via `/publish-wiki`). Reads happen locally — no API
-calls — to keep Claude's context cheap.
+ADRs live at `docs/decisions/<NNNN>-<slug>.md` inside the `/docs` folder.
+They are visible on github.com via normal markdown rendering — no separate
+publish step. Reads happen locally — no API calls — to keep Claude's
+context cheap.
 
 - **`docs/decisions/INDEX.md`** is the always-loaded compressed
   summary. `/feature`, `/develop`, `/quick-fix`, `/hotfix` all read it via
@@ -117,7 +118,7 @@ library context.
 
 | Concept | GitHub primitive |
 |---|---|
-| Work-item hierarchy | Parent Issue + Sub-issues (`gh api graphql`) |
+| Work-item hierarchy | Parent Issue + Sub-issues (`gh api` REST endpoint `/repos/.../issues/{n}/sub_issues`) |
 | Work-item type | Labels `type:feature`, `type:hotfix`, `type:quickfix`, `type:task` |
 | Workflow state | Labels `state:in-progress`, `state:blocked`, `state:awaiting-review`, `state:ready-to-promote` (idle = no `state:*` label) + `.state.md` (source of truth) |
 | Pull requests | `gh pr create` against `develop` (features) or `main` (hotfix) |

@@ -233,7 +233,8 @@ Append to History in `.state.md`:
 
 Also update the flat fields:
 ```bash
-sed -i.bak -E "s/^step:.*/step: quick-fix/"   .state.md && rm -f .state.md.bak
+sed -i.bak -E "s/^step:.*/step: quick-fix/" .state.md && rm -f .state.md.bak
+sed -i.bak -E "s/^next_command:.*/next_command: \/staging/" .state.md && rm -f .state.md.bak
 ```
 
 ## Step 14: Summary

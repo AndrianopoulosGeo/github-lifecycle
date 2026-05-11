@@ -13,6 +13,7 @@ step: <feature|develop|quick-fix|hotfix|staging|release|idle>
 status: <idle|in-progress|blocked|awaiting-review|ready-to-promote>
 issue: <number or empty>
 branch: <current branch or empty>
+next_command: <next slash-command to run, or empty if done>
 
 ## History
 - [YYYY-MM-DD HH:MM] /command — status: result (brief summary)
@@ -74,7 +75,7 @@ At the END of every lifecycle command, update `.state.md`:
 
 # Set both .state.md status AND the issue's state:* label
 set_state() {
-  local issue_number="$1"
+  local issue_id="$1"
   local new_state="$2"   # one of: idle, in-progress, blocked, awaiting-review, ready-to-promote
 
   # 1) Update .state.md
@@ -84,17 +85,17 @@ set_state() {
 
   # 2) Project to label (idle = no state:* label)
   if [ "$new_state" = "idle" ]; then
-    set_state_label "$issue_number" ""
+    set_state_label "$issue_id" ""
   else
-    set_state_label "$issue_number" "$new_state"
+    set_state_label "$issue_id" "$new_state"
   fi
 }
 
 # Reconcile on command start — if .state.md disagrees with label, .state.md wins.
 reconcile_state() {
-  local issue_number="$1"
+  local issue_id="$1"
   local md_state
   md_state="$(awk -F': *' '/^status:/{print $2; exit}' .state.md 2>/dev/null || echo idle)"
-  set_state "$issue_number" "$md_state"
+  set_state "$issue_id" "$md_state"
 }
 ```

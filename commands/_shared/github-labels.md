@@ -39,15 +39,15 @@ create_canonical_labels() {
 
 # Set state label on an issue (replaces any existing state:* label)
 set_state_label() {
-  local issue_number="$1"
+  local issue_id="$1"
   local new_state="$2"   # empty = idle, otherwise one of: in-progress, blocked, awaiting-review, ready-to-promote
   local existing
-  existing="$(gh issue view "$issue_number" --json labels -q '.labels[].name' | grep -E '^state:' || true)"
+  existing="$(gh issue view "$issue_id" --json labels -q '.labels[].name' | grep -E '^state:' || true)"
   if [ -n "$existing" ]; then
-    gh issue edit "$issue_number" --remove-label "$existing"
+    gh issue edit "$issue_id" --remove-label "$existing"
   fi
   if [ -n "$new_state" ]; then
-    gh issue edit "$issue_number" --add-label "state:${new_state}"
+    gh issue edit "$issue_id" --add-label "state:${new_state}"
   fi
 }
 ```

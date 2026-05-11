@@ -297,6 +297,7 @@ step: idle
 status: idle
 issue:
 branch:
+next_command:
 
 ## History
 STATEEOF

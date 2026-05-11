@@ -100,13 +100,6 @@ TECH_STACK=nextjs
 # OPTIONAL — Environment URLs (leave empty if not set up yet)
 STAGING_URL=https://staging.yourproject.com
 PRODUCTION_URL=https://yourproject.com
-
-# OPTIONAL — Branch strategy (default: gitflow)
-BRANCH_STRATEGY=gitflow
-
-# OPTIONAL — Pipeline IDs (auto-populated after pipeline creation)
-STAGING_PIPELINE_ID=
-PRODUCTION_PIPELINE_ID=
 ```
 
 ### gh CLI auth
@@ -191,8 +184,7 @@ Or use `/next` to auto-advance between steps.
 
 ### Manage Documentation
 ```
-/wiki status
-/wiki auto
+/wiki
 ```
 
 ## Command Reference
@@ -209,10 +201,6 @@ Or use `/next` to auto-advance between steps.
 | `/staging` | Promote to staging | After `/develop` or `/quick-fix` |
 | `/release` | Deploy to production | After `/staging` verification |
 | `/wiki` | Manage project docs | Keep docs current |
-| `/board` | View GitHub issues board | Check work items |
-| `/overview` | Standup report | Daily standup |
-| `/ticket` | Create work item | Quick ticket creation |
-| `/update-ticket` | Update work item | Change ticket status/fields |
 
 ## Workflow Diagram
 
@@ -270,8 +258,8 @@ cp "/path/to/github-lifecycle/commands/_shared/"*.md .claude/commands/_shared/
 - `.state.md` status is `idle` — start a workflow with `/feature`, `/quick-fix`, or `/hotfix`
 
 ### Pipeline not triggering
-- Set `STAGING_PIPELINE_ID` and `PRODUCTION_PIPELINE_ID` in `.env.claude`
 - Workflow must be configured in GitHub Actions to trigger on branch pushes
+- Check `.github/workflows/` for the generated workflow stubs and ensure they reference the correct branches
 
 ### Docs templates not populated
-- Run `/wiki auto` to auto-generate content from codebase analysis
+- Run `/wiki` to list and review docs under `/docs/` with titles and descriptions

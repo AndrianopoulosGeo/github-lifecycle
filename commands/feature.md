@@ -532,7 +532,7 @@ If `.state.md` exists (or create it from template), update:
 - `track`: `feature`
 - `step`: `feature`
 - `branch`: `feature/${PARENT}-${SLUG}`
-- `issue_number`: the parent issue number (`$PARENT`)
+- `issue`: the parent issue number (`$PARENT`)
 - `started_at`: current ISO timestamp
 - `last_command`: `/feature`
 - `status`: `ready-to-promote`

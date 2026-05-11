@@ -134,7 +134,7 @@ If the changes include both code and auto-updated docs, the commit type should r
 Look for an issue number from:
 1. The current branch name (e.g., `feature/123-foo` → `#123`, `fix/456-bar` → `#456`)
 2. `$ARGUMENTS` if it contains a `#number`
-3. `.state.md` if it has a `ticket_id` field
+3. `.state.md` if it has an `issue` field
 
 If found, append `Refs: #<issue-number>` to the commit body.
 

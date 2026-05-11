@@ -22,10 +22,10 @@ create_parent_issue() {
 
 ### Create a sub-issue and link it to a parent
 
-GitHub sub-issues are added via the REST API (`/repos/{owner}/{repo}/issues/{issue_number}/sub_issues`).
+GitHub sub-issues are added via the REST API (`/repos/{owner}/{repo}/issues/{issue}/sub_issues`).
 
 ```bash
-# Args: parent_issue_number, sub_title, sub_body
+# Args: parent_issue, sub_title, sub_body
 # Echoes the sub-issue number.
 create_sub_issue() {
   local parent="$1"

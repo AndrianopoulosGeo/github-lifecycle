@@ -69,7 +69,7 @@ Reconcile state at startup:
 if [ -n "${ARGUMENTS:-}" ]; then
   PARENT="$ARGUMENTS"
 else
-  PARENT="$(awk -F': *' '/^issue_number:/{print $2; exit}' .state.md 2>/dev/null)"
+  PARENT="$(awk -F': *' '/^issue:/{print $2; exit}' .state.md 2>/dev/null)"
 fi
 reconcile_state "$PARENT"
 ```

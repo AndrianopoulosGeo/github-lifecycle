@@ -16,7 +16,7 @@ Also load optional staging-specific vars from `.env.claude`:
 
 ```bash
 export STAGING_URL=$(grep STAGING_URL .env.claude 2>/dev/null | cut -d '=' -f2 || true)
-export ISSUE=$(grep ticket_id .state.md 2>/dev/null | sed 's/.*ticket_id: *//' || true)
+export ISSUE=$(awk -F': *' '/^issue:/{print $2; exit}' .state.md 2>/dev/null || true)
 ```
 
 ## Step 2: Read State

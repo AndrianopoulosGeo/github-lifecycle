@@ -47,7 +47,7 @@ If `next_command` is set and status is `ready-to-promote`:
 | `/develop` | Invoke the Skill tool with skill: "develop" |
 | `/staging` | Invoke the Skill tool with skill: "staging" |
 | `/release` | Invoke the Skill tool with skill: "release" |
-| `done` | Report: "Workflow complete! Track: [track], Issue: #[ticket_id]. State reset to idle." Then update `.state.md` to idle. |
+| `done` | Report: "Workflow complete! Track: [track], Issue: #[issue]. State reset to idle." Then update `.state.md` to idle. |
 
 ## Step 3: Report
 
@@ -58,7 +58,7 @@ Before invoking the next command, print:
   Completed: [step]
   Next: [next_command]
   Branch: [branch]
-  Issue: #[ticket_id]
+  Issue: #[issue]
 ```
 
 Then invoke the next command.
