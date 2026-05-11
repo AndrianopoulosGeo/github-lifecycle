@@ -1,16 +1,28 @@
-# Installation Guide — Claude Skills Portable Lifecycle
+# Installation Guide — GitHub Lifecycle
+
+## Install via marketplace (recommended)
+
+```bash
+# In a Claude Code session:
+/plugin marketplace add AndrianopoulosGeo/claude-marketplace
+/plugin install github-lifecycle@andrianopoulos-marketplace
+```
+
+Note: the marketplace is a private GitHub repo. You need `gh auth status` to show you are logged in with read access.
 
 ## Prerequisites
 
 Before installing, make sure you have:
 
 - **Claude Code** installed and working
-- **Superpowers plugin** enabled (`claude plugins install superpowers`)
+- **Superpowers plugin** (`/plugin install superpowers@claude-plugins-official`)
 - **`gh` CLI** authenticated (`gh auth status`)
 - **GitHub** project repository
 - **Git** initialized in your project
 
-## Step 1: Clone the Skills Repo
+## Install from source (development)
+
+### Step 1: Clone the Skills Repo
 
 ```bash
 git clone https://github.com/AndrianopoulosGeo/github-lifecycle
@@ -21,7 +33,7 @@ Or if you already have it:
 cd "github-lifecycle" && git pull origin main
 ```
 
-## Step 2: Copy Commands to Your Project
+### Step 2: Copy Commands to Your Project
 
 From your project's root directory:
 
@@ -64,7 +76,7 @@ cp "$SKILLS_DIR/templates/.state.md.example" .
 echo "Commands installed. Run: claude then /init-project"
 ```
 
-## Step 3: Create `.env.claude`
+### Step 3: Create `.env.claude`
 
 Copy the template and fill in your values:
 
@@ -111,7 +123,7 @@ echo ".env.claude" >> .gitignore
 
 If your `.gitignore` already has `.env*`, you're covered.
 
-## Step 4: Run `/init-project`
+### Step 4: Run `/init-project`
 
 Start Claude Code in your project and run:
 
@@ -128,7 +140,7 @@ This will:
 - Update `CLAUDE.md` with docs references
 - Create `.state.md` for workflow tracking
 
-## Step 5: Verify Installation
+### Step 5: Verify Installation
 
 ```
 /validate-env
