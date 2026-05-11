@@ -5,7 +5,7 @@
 ```bash
 # In a Claude Code session:
 /plugin marketplace add AndrianopoulosGeo/claude-marketplace
-/plugin install github-lifecycle@andrianopoulos-marketplace
+/plugin install github-lifecycle@pgsquare
 ```
 
 Note: the marketplace is a private GitHub repo. You need `gh auth status` to show you are logged in with read access.

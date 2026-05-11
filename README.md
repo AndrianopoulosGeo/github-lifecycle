@@ -9,7 +9,7 @@ Full development lifecycle automation with GitHub — feature planning, TDD, sta
 /plugin marketplace add AndrianopoulosGeo/claude-marketplace
 
 # Install the plugin
-/plugin install github-lifecycle@andrianopoulos-marketplace
+/plugin install github-lifecycle@pgsquare
 ```
 
 ## Prerequisites
