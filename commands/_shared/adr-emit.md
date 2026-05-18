@@ -51,7 +51,7 @@ If no trigger fires, skip ADR emission entirely.
    `status: superseded`.
 
 5. Regenerate the index by invoking the `Skill` tool with
-   `skill: "compress-decisions"`.
+   `skill: "github-lifecycle:compress-decisions"`.
 
 6. Add a one-line ADR link to the parent GitHub Issue body or a comment (the
    decision record is the source of truth; the issue is the pointer):

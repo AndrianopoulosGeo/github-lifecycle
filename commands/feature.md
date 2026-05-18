@@ -76,13 +76,9 @@ After reading these files, prepare a **concise architectural brief** covering:
 
 ### 3.4 Load Architectural Decisions (cheap)
 
-Follow `commands/_shared/load-decisions.md`:
-
-1. Read `docs/decisions/INDEX.md` if present.
-2. Include the index in the architectural brief passed to brainstorming.
-3. If `adr_count >= 15`, print the threshold notice and continue.
-4. Do NOT read individual ADR files unless the feature challenges or
-   supersedes one.
+Follow `commands/_shared/load-decisions.md` (read it inline). Include the
+`docs/decisions/INDEX.md` contents in the architectural brief passed to
+brainstorming in Step 4.
 
 ---
 
@@ -225,7 +221,7 @@ introduces or changes an architectural decision.
 
 Follow `commands/_shared/adr-emit.md` (read it inline) to decide whether an
 ADR is warranted and, if so, to emit it. Stage the ADR but do NOT commit yet —
-later steps still run; `/develop` commits the plan files and ADR together.
+Steps 6 (plan) and 10 (issue creation) still run; `/develop` commits the plan files and ADR together.
 
 ---
 
