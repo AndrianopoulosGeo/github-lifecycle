@@ -45,27 +45,23 @@ Then ask (use `AskUserQuestion` with options):
 
 ## STEP 3: LOAD ARCHITECTURAL REFERENCES
 
-Read the project's **architectural and convention reference docs**. These define HOW we build — the brainstorming design MUST conform to these rules.
+Read the project's **architectural and convention reference docs**. These define HOW we build — the brainstorming design MUST conform to them.
 
-### 3.1 Architecture & Conventions (REQUIRED — read all)
+### 3.1 Architecture & Conventions (REQUIRED — read all that exist)
 
-| File | What it provides |
-|------|-----------------|
-| `CLAUDE.md` | Project conventions, code standards, naming rules, test commands |
-| `docs/architecture.md` | **PRIMARY reference** — component hierarchy, server vs client components, data flow, styling architecture, API architecture, directory conventions |
-| `docs/decisions/INDEX.md` | Architecture Decision Records — compressed one-line summary of every accepted decision. Load full ADR files (`docs/decisions/<NNNN>-*.md`) only on demand, per `commands/_shared/load-decisions.md`. |
-| `docs/TESTING.md` | **Testing reference** — test runners, commands, file structure, mocking patterns, E2E conventions, CI pipeline |
+- `CLAUDE.md` — conventions, code standards, naming rules, test commands
+- `docs/architecture.md` — **PRIMARY reference**: component hierarchy, server vs client components, data flow, styling/API architecture, directory conventions
+- `docs/decisions/INDEX.md` — compressed one-line summary of every accepted ADR (full files loaded on demand, per `commands/_shared/load-decisions.md`)
+- `docs/TESTING.md` — **Testing reference**: test runners, commands, file structure, mocking patterns, E2E conventions, CI pipeline
 
-> **Portability note:** These paths refer to the **target project**, not the plugin. Read whatever exists — not all projects have all files. Let `TECH_STACK` from `.env.claude` guide which config files to look for (e.g., `package.json` for nextjs, `.csproj` for dotnet, `pyproject.toml` for python).
+> **Portability note:** These paths refer to the **target project**, not the plugin. Not all projects have all files. Let `TECH_STACK` from `.env.claude` guide which config files to look for (`package.json` for nextjs, `.csproj` for dotnet, `pyproject.toml` for python).
 
-### 3.2 Project Configuration (read for context — read whatever exists)
+### 3.2 Project Configuration (read for context — whatever exists)
 
-| File | What it provides |
-|------|-----------------|
-| `package.json` or `*.csproj` or `pyproject.toml` | Dependencies, scripts, tech stack |
-| Framework config (`next.config.ts`, `appsettings.json`, etc.) | Framework-specific configuration |
-| `tsconfig.json` | TypeScript configuration (if applicable) |
-| Test config (`vitest.config.ts`, `playwright.config.ts`, etc.) | Test runner configuration (if applicable) |
+- `package.json` / `*.csproj` / `pyproject.toml` — dependencies, scripts, tech stack
+- Framework config (`next.config.ts`, `appsettings.json`, etc.) — framework-specific configuration
+- `tsconfig.json` — TypeScript configuration (if applicable)
+- Test config (`vitest.config.ts`, `playwright.config.ts`, etc.) — test runner configuration (if applicable)
 
 ### 3.3 What to extract for brainstorming
 
@@ -225,67 +221,11 @@ Include:
 ## STEP 5.5: EMIT ADR (only if an architectural decision was reached)
 
 After brainstorming + design-doc creation, decide whether the feature
-introduces or changes an architectural decision. **Most features do NOT** —
-they implement existing patterns.
+introduces or changes an architectural decision.
 
-### Trigger conditions (any one is enough)
-
-- The brainstorming chose between 2+ approaches at the architectural level
-  (e.g., "client component vs. server component" for a class of features,
-  "SignalR vs. polling", "JWT vs. session cookies", "raw SQL vs. ORM").
-- The feature introduces a new library, service, or external dependency.
-- The feature changes how a layer interacts with another layer.
-- The feature deliberately departs from an existing pattern (and is not
-  expected to be one-off).
-
-### If NO trigger fires
-
-Skip this step. Do not write an ADR for routine implementation work.
-
-### If a trigger fires
-
-0. **Precondition** — verify the decisions folder is scaffolded:
-
-```bash
-if [ ! -d docs/decisions ] || [ ! -f docs/decisions/0000-template.md ]; then
-  echo "ERROR: docs/decisions/ not scaffolded. Run /init-project first."
-  exit 1
-fi
-```
-
-1. Determine the next ADR number:
-
-```bash
-LAST=$(ls docs/decisions/ 2>/dev/null | grep -E '^[0-9]{4}-' | sort | tail -1 | cut -d'-' -f1)
-NEXT=$(printf "%04d" $((10#${LAST:-0} + 1)))
-SLUG="<kebab-case slug from decision title>"
-ADR_PATH="docs/decisions/${NEXT}-${SLUG}.md"
-```
-
-2. Copy the template and fill it in:
-
-```bash
-cp docs/decisions/0000-template.md "$ADR_PATH"
-```
-
-Edit `$ADR_PATH` with:
-- Title (NNNN — present-tense imperative)
-- `status: accepted`
-- `date: <today>`
-- `feature_id: <PARENT>` (the GitHub issue number)
-- `tags`: relevant area (e.g., `[realtime, dashboard, signalr]`)
-- The four canonical sections filled with the brainstorm output
-
-3. If this ADR supersedes another, set `supersedes: NNNN` in the new ADR
-   frontmatter and update the old ADR's `superseded_by: NNNN` and
-   `status: superseded`.
-
-4. Regenerate the index by invoking the `Skill` tool with
-   `skill: "github-lifecycle:compress-decisions"` (or running `/compress-decisions`).
-
-5. Stage but do NOT commit yet — Step 6 (implementation plan) and Step 10
-   (issue creation) are still ahead. Plan files and ADR get committed
-   together by `/develop` later.
+Follow `commands/_shared/adr-emit.md` (read it inline) to decide whether an
+ADR is warranted and, if so, to emit it. Stage the ADR but do NOT commit yet —
+later steps still run; `/develop` commits the plan files and ADR together.
 
 ---
 
@@ -295,82 +235,14 @@ Edit `$ADR_PATH` with:
 
 ### 6.1 Write the Implementation Plan
 
-Using the approved design, write a detailed implementation plan. **Assume the implementing engineer has zero codebase context** — document everything they need.
+Write the implementation plan to `docs/plans/<feature-name>.md` by following
+`commands/_shared/plan-template.md` (read it inline). Read
+`commands/_shared/stack-$TECH_STACK.md` alongside it for the stack-specific
+tech-stack line, directory conventions, and test/build commands.
 
-Save as a **temporary working file**:
-
-```
-docs/plans/<feature-name>.md
-```
-
-### Plan Header (REQUIRED)
-
-```markdown
-# [Feature Name] Implementation Plan
-
-> **For Claude:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.
-
-**Goal:** [One sentence]
-
-**Architecture:** [2-3 sentences — component structure, data flow, animation approach]
-
-**Tech Stack:** Next.js, React, Framer Motion, Tailwind CSS, TypeScript
-
-**Design Doc:** `docs/plans/<feature-name>-design.md`
-
-**Testing Reference:** `docs/TESTING.md`
-
-**Library Versions Verified:** [List libraries + versions confirmed via Context7]
-
----
-```
-
-### Task Structure
-
-Each task follows TDD with bite-sized steps (2-5 minutes each):
-
-```markdown
-### Task N: [Component Name]
-
-**Files:**
-- Create: `src/components/[component].tsx`
-- Create: `src/app/[route]/page.tsx`
-- Test (unit): `src/__tests__/[component].test.tsx`
-- Test (E2E): `e2e/[feature].spec.ts`
-
-**Step 1: Write the failing test**
-[Complete test code — follow patterns from docs/TESTING.md]
-
-**Step 2: Run test to verify it fails**
-Run: npm test -- [test-file]
-Expected: FAIL with "[reason]"
-
-**Step 3: Write minimal implementation**
-[Complete implementation code]
-
-**Step 4: Run test to verify it passes**
-Run: npm test -- [test-file]
-Expected: PASS
-
-**Step 5: Commit**
-[exact git commands]
-```
-
-**Build/test commands vary by TECH_STACK:**
-- `nextjs`: `npm run build`, `npm test`, `npm run test:e2e`
-- `dotnet`: `dotnet build`, `dotnet test`
-- `python`: `python -m pytest`, `python -m pytest e2e/`
-
-Alternatively, read the exact build/test commands from the project's `CLAUDE.md` if they are documented there.
-
-### Plan Requirements
-
-- **Exact file paths** matching Next.js project structure (`src/app/`, `src/components/sections/`, `src/components/ui/`, `src/components/layout/`, `src/lib/`, `src/hooks/`)
-- **Complete code** in the plan (not "add validation" — show the actual code)
-- **Dependency order**: shared utils/types → components → pages → API routes → animations/polish
-- **DRY, YAGNI, TDD** — frequent commits
-- **Testing follows docs/TESTING.md**: Unit tests in `src/__tests__/`, E2E tests in `e2e/`, mocking patterns from `src/__tests__/setup.tsx`
-- **Verified APIs**: All library API usage must match the docs fetched in Step 6.0 — no guessing deprecated or non-existent methods
+This is a **temporary working file** — consumed by `/develop`, then cleaned up
+after merge. All library docs gathered in Step 4.5 must be reflected so every
+API used in the plan matches verified, current documentation — no guessing.
 
 ---
 
