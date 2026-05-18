@@ -1,6 +1,6 @@
 ---
 allowed-tools: [Read, Bash, Glob, Grep]
-description: Merge staging to main, tag a release version, and close the feature issue. Use when staging is verified and the release is approved.
+description: Merge staging to main, tag a version, publish a GitHub Release, update the changelog, and close the feature issue. Use when staging is verified and the release is approved.
 ---
 
 # /release — Promote to Production
