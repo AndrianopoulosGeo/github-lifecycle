@@ -229,7 +229,7 @@ Steps 6 (plan) and 10 (issue creation) still run; `/develop` commits the plan fi
 
 ---
 
-## STEP 6: CREATE IMPLEMENTATION PLAN (superpowers:writing-plans pattern)
+## STEP 6: CREATE IMPLEMENTATION PLAN
 
 **Context gathering was completed in Step 4.5.** All library docs, best practices, and MCP tool context are already available. Use them to write the plan with verified, current API usage.
 
