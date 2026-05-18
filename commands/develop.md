@@ -239,8 +239,6 @@ Load context before implementing: Context7 (mandatory) `resolve-library-id` + `q
 
 ## PHASE 4: IMPLEMENTATION
 
-**REMINDER: All Phase 4 work happens inside the worktree (`$WORKTREE_PATH`), NOT the main working directory.**
-
 ### 4.1 Implement Feature (following the implementation plan)
 
 **Follow the implementation plan strictly** — task-by-task TDD steps with exact file paths, code, and test commands.
@@ -293,7 +291,7 @@ gh issue comment "$PARENT" \
 
 ### CHECKPOINT 4
 
-**STOP AND VERIFY**: Call `TaskList`. Phases 5-10 must still be pending — **6 more phases** remain. Implementation is NOT the end of the workflow.
+**STOP AND VERIFY**: Call `TaskList`. Phases 5-10 must still be pending — implementation is NOT the end of the workflow.
 
 ## PHASE 5: BUILD & TEST
 
@@ -301,7 +299,7 @@ Run the build, lint, and test commands from `commands/_shared/stack-$TECH_STACK.
 
 ### CHECKPOINT 5
 
-**CRITICAL — DO NOT STOP HERE.** You MUST see Phases 6, 7, 8, 9, and 10 still pending. The feature is NOT done. Proceed immediately to Phase 6.
+**CRITICAL — DO NOT STOP HERE.** Phases 6-10 must still be pending. The feature is NOT done. Proceed immediately to Phase 6.
 
 ## PHASE 6: CODE SIMPLIFICATION [MANDATORY QUALITY GATE]
 
@@ -366,8 +364,6 @@ If docs were changed, commit: `docs: update architecture for <feature-name>` wit
 ### CHECKPOINT 9
 
 ## PHASE 10: PUSH, PR, AND CI GATE
-
-**Push the feature branch, create a PR, and wait for CI to pass before merging.**
 
 ### 10.1 Push feature branch to remote
 
@@ -450,8 +446,6 @@ git push origin "feature/${PARENT}-${SLUG}"
 **Max retries: 3** — if CI still fails after 3 fix attempts, **STOP and ask the user**, presenting the failure history (per-attempt failing check + root-cause summary).
 
 ### 10.x Update Workflow State
-
-Update state after merge:
 
 ```bash
 set_state "$PARENT" "ready-to-promote"
