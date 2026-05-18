@@ -32,3 +32,8 @@ export GITHUB_OWNER GITHUB_REPO
 ```
 
 Every lifecycle command sources this fragment before issuing any `gh` call.
+
+`.env.claude` may also define `PREFERRED_LANGUAGE` — the language Claude
+converses in (set via `/set-language`). It is optional and defaults to English
+when unset. Because the block above sources `.env.claude` wholesale,
+`PREFERRED_LANGUAGE` is loaded automatically with no extra wiring.

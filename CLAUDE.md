@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What This Is
 
-A Claude Code plugin (`github-lifecycle`) that provides 17 slash commands for full development lifecycle automation with GitHub and Gitflow branching. Distributed via a custom marketplace (`AndrianopoulosGeo/claude-marketplace`).
+A Claude Code plugin (`github-lifecycle`) that provides 18 slash commands for full development lifecycle automation with GitHub and Gitflow branching. Distributed via a custom marketplace (`AndrianopoulosGeo/claude-marketplace`).
 
 ## Architecture
 

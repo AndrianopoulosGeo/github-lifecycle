@@ -1,0 +1,43 @@
+{
+  "name": "set-language command evals",
+  "command": "/set-language",
+  "tests": [
+    {
+      "name": "writes PREFERRED_LANGUAGE to .env.claude and appends CLAUDE.md block",
+      "input": "",
+      "setup": [
+        "printf 'GITHUB_OWNER=acme\\nGITHUB_REPO=demo\\n' > .env.claude",
+        "rm -f CLAUDE.md"
+      ],
+      "expects": [
+        "asks the user for a preferred language",
+        ".env.claude contains a PREFERRED_LANGUAGE line",
+        "CLAUDE.md contains a '## Interaction Language' heading",
+        "confirmation message is shown in the chosen language"
+      ]
+    },
+    {
+      "name": "is idempotent — does not duplicate the CLAUDE.md block on re-run",
+      "input": "",
+      "setup": [
+        "printf 'GITHUB_OWNER=acme\\nPREFERRED_LANGUAGE=Greek\\n' > .env.claude",
+        "printf '# Demo\\n\\n## Interaction Language\\n\\nexisting block\\n' > CLAUDE.md"
+      ],
+      "expects": [
+        "CLAUDE.md still has exactly one '## Interaction Language' heading",
+        "PREFERRED_LANGUAGE line is updated in place, not duplicated"
+      ]
+    },
+    {
+      "name": "stops when .env.claude is missing",
+      "input": "",
+      "setup": [
+        "rm -f .env.claude"
+      ],
+      "expects": [
+        "does not create a partial .env.claude",
+        "tells the user to run /init-project first"
+      ]
+    }
+  ]
+}

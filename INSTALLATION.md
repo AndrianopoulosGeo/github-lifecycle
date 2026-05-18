@@ -100,6 +100,9 @@ TECH_STACK=nextjs
 # OPTIONAL — Environment URLs (leave empty if not set up yet)
 STAGING_URL=https://staging.yourproject.com
 PRODUCTION_URL=https://yourproject.com
+
+# OPTIONAL — Language Claude converses in; defaults to English. Set via /set-language
+PREFERRED_LANGUAGE=English
 ```
 
 ### gh CLI auth
@@ -193,6 +196,7 @@ Or use `/next` to auto-advance between steps.
 |---------|-------------|-------------|
 | `/init-project` | Bootstrap project setup | Once per project |
 | `/validate-env` | Health check | After setup or when things seem wrong |
+| `/set-language` | Set the language Claude converses in (all artifacts stay English) | Anytime — to change Claude's chat language |
 | `/next` | Auto-advance workflow | Between pipeline steps |
 | `/feature` | Plan + design + tickets | New features |
 | `/develop` | 10-phase TDD implementation | After `/feature` |

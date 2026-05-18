@@ -93,6 +93,9 @@ TECH_STACK=<detected or entered>
 STAGING_URL=<entered or empty>
 PRODUCTION_URL=<entered or empty>
 
+# Preferences (optional)
+PREFERRED_LANGUAGE=English
+
 # (no GITHUB_PAT — gh CLI handles auth)
 ```
 
