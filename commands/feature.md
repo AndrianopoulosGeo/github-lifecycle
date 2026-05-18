@@ -1,5 +1,6 @@
 ---
 allowed-tools: [Read, Write, Edit, Bash, Glob, Grep, Agent, Skill]
+description: Plan a new feature — brainstorm the design, write implementation plans, and create the GitHub Issue and sub-issue hierarchy. Use when starting a new feature.
 ---
 
 Create a fully planned feature: brainstorm the design, write implementation plans, then create GitHub Issues with sub-issues. Produces 2 plan files that `/develop` consumes.

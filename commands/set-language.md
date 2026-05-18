@@ -1,5 +1,6 @@
 ---
 allowed-tools: [Read, Write, Edit, Bash, Glob, Grep]
+description: Set the preferred conversation language in .env.claude and CLAUDE.md. Use to change the language Claude converses in.
 ---
 
 # /set-language — Set Interaction Language

@@ -1,5 +1,6 @@
 ---
 allowed-tools: [Read, Write, Edit, Bash, Glob, Grep]
+description: Create, list, show, supersede, or deprecate Architecture Decision Records. Use to manage architectural decisions outside the feature workflow.
 ---
 
 # /decision — Manual ADR Operations

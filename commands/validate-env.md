@@ -1,5 +1,6 @@
 ---
 allowed-tools: [Read, Bash, Glob, Grep]
+description: Validate that .env.claude and the project environment are correctly configured. Use to diagnose configuration problems before running lifecycle commands.
 ---
 
 # /validate-env — Environment Health Check

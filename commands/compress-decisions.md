@@ -1,5 +1,6 @@
 ---
 allowed-tools: [Read, Write, Edit, Bash, Glob, Grep]
+description: Regenerate the ADR index (INDEX.md) from the decision records. Use after creating, superseding, or deprecating an ADR.
 ---
 
 # /compress-decisions — Regenerate ADR Index

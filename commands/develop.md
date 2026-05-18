@@ -1,5 +1,6 @@
 ---
 allowed-tools: [Read, Write, Edit, Bash, Glob, Grep, Agent, Skill, TaskCreate, TaskUpdate, TaskList]
+description: Execute the full feature development lifecycle — implement from plan files (auto-generated if absent), build, test, simplify, review, commit, and open a PR. Use when implementing a feature tracked as a GitHub Issue.
 ---
 
 # Automated Feature Development Workflow

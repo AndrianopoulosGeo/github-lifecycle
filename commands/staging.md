@@ -1,5 +1,6 @@
 ---
 allowed-tools: [Read, Bash, Glob, Grep]
+description: Promote the current work to the staging environment and run the staging workflow. Use when a feature or quick-fix is ready for staging verification.
 ---
 
 # /staging — Promote to Staging Environment

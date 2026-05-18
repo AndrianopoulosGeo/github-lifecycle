@@ -1,5 +1,6 @@
 ---
 allowed-tools: [Read, Write, Edit, Bash, Glob, Grep]
+description: Initialize a project for the GitHub lifecycle — scaffold config, state, docs, labels, and decision records. Use once when onboarding a project to this plugin.
 ---
 
 # /init-project — Project Bootstrap

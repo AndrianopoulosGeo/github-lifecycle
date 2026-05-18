@@ -1,5 +1,6 @@
 ---
 allowed-tools: [Read, Write, Edit, Bash, Glob, Grep, Agent, Skill]
+description: Implement a small fix or improvement with TDD on a fix branch. Use for bug fixes and minor changes that do not need full feature planning.
 ---
 
 # /quick-fix — Fast Track Development

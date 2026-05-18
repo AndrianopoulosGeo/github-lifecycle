@@ -1,6 +1,6 @@
 ---
 allowed-tools: [Read, Write, Edit, Bash, Glob, Grep, Agent]
-description: Commit changes with no AI attribution and auto-update context docs
+description: Create a clean, conventionally-formatted git commit with no AI attribution, and automatically update context docs. Use when committing code changes in a lifecycle project.
 ---
 
 # /commit — Smart Commit

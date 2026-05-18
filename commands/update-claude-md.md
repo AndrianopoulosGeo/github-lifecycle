@@ -1,5 +1,6 @@
 ---
 allowed-tools: [Read, Write, Edit, Bash, Glob, Grep, Agent]
+description: Generate or refresh the project's CLAUDE.md from the current codebase. Use to keep project context documentation accurate after structural changes.
 ---
 
 # /update-claude-md — Update Project Context in CLAUDE.md

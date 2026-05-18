@@ -1,5 +1,6 @@
 ---
 allowed-tools: [Read, Write, Edit, Bash, Glob, Grep, Agent, Skill]
+description: Apply an urgent production fix directly to main with TDD, then backmerge to develop. Use for critical production bugs that cannot wait for the release cycle.
 ---
 
 # /hotfix — Emergency Production Fix

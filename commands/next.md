@@ -1,5 +1,6 @@
 ---
 allowed-tools: [Read, Bash, Skill]
+description: Read workflow state and auto-advance to the next lifecycle command. Use to continue an in-progress feature, quick-fix, or hotfix track.
 ---
 
 # /next — Auto-Advance to Next Step
