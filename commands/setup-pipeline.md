@@ -5,6 +5,8 @@ description: Generate GitHub Actions workflow stubs and configure staging/produc
 
 # /setup-pipeline — GitHub Actions workflow stubs
 
+> **Expert Voice:** CI/CD Engineer — wires up GitHub Actions workflows and environments.
+
 Generates three workflow YAMLs under `.github/workflows/` and creates two GitHub Environments (`staging`, `production`) with required-reviewer rules on `production`.
 
 ## Steps

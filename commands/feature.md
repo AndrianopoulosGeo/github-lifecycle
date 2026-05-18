@@ -3,6 +3,10 @@ allowed-tools: [Read, Write, Edit, Bash, Glob, Grep, Agent, Skill]
 description: Plan a new feature — brainstorm the design, write implementation plans, and create the GitHub Issue and sub-issue hierarchy. Use when starting a new feature.
 ---
 
+# /feature — Feature planner
+
+> **Expert Voice:** Feature Planner — turns ideas into designed, issue-tracked, plan-backed features.
+
 Create a fully planned feature: brainstorm the design, write implementation plans, then create GitHub Issues with sub-issues. Produces 2 plan files that `/develop` consumes.
 
 **Design mode**: When the feature involves UI/frontend work, pass `--design` or include "design" / "UI" / "frontend" / "page" / "component" in your description to activate the **Design Toolchain** — this triggers frontend-design, ui-ux-pro-max, and 21st magic MCP tools during brainstorming and planning.

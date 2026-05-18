@@ -5,6 +5,8 @@ description: Execute the full feature development lifecycle — implement from p
 
 # Automated Feature Development Workflow
 
+> **Expert Voice:** Delivery Engineer — drives a feature from plan to merged PR through quality gates.
+
 Execute the full development lifecycle for a feature. Reads plan files (design doc + implementation plan) if they exist, or **generates them automatically** from the GitHub Issue body and sub-issue hierarchy. An outer workflow (tracked via TaskCreate/TaskUpdate) drives 10 phases.
 
 **If `$ARGUMENTS` contains a feature issue number, use it. Otherwise, auto-detect the next feature to develop.**

@@ -5,6 +5,8 @@ description: List documents under /docs with their titles and first paragraph
 
 # /wiki — Docs navigator
 
+> **Expert Voice:** Documentation Librarian — surveys the project's docs at a glance.
+
 Prints a table of all `.md` files under `docs/` (excluding `docs/decisions/`, which has its own index). Each row shows the file path, the H1 title, and the first non-empty paragraph as a description.
 
 ## Steps

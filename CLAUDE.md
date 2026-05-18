@@ -28,8 +28,14 @@ Commands are **not code** — they're structured prompts with bash snippets, dec
 ### Shared Fragments
 
 `commands/_shared/` contains reusable patterns that commands reference (not import — they're read inline):
-- `load-config.md` — `.env.claude` loading and GitHub auth (used by all lifecycle commands)
-- `state-management.md` — `.state.md` read/write patterns and track→step→next mappings
+- `commands/_shared/load-config.md` — `.env.claude` loading and GitHub auth (used by all lifecycle commands)
+- `commands/_shared/load-decisions.md` — ADR index loader (cheap-context pattern for decision history)
+- `commands/_shared/state-management.md` — `.state.md` read/write patterns and track→step→next mappings
+- `commands/_shared/github-issues.md` — `create_parent_issue()`, `create_sub_issue()`, `list_sub_issues()`, `close_sub_issue()` helpers
+- `commands/_shared/github-labels.md` — `create_canonical_labels()`, `set_state_label()` helpers
+- `commands/_shared/stack-nextjs.md` / `commands/_shared/stack-dotnet.md` / `commands/_shared/stack-python.md` — per-stack install, build, test commands and directory conventions
+- `commands/_shared/plan-template.md` — stack-agnostic implementation-plan structure consumed by `/feature` and `/develop`
+- `commands/_shared/adr-emit.md` — ADR creation and supersede flow
 
 ### Command Dependency Chain
 
@@ -39,9 +45,9 @@ Commands delegate to each other and to external plugins:
 |---------|-------------|
 | `/commit` | `commit-commands:commit` (external plugin) |
 | `/develop`, `/quick-fix`, `/hotfix` | `/commit` for all commits |
-| `/develop` | `superpowers:executing-plans`, `pr-review-toolkit:code-simplifier`, `pr-review-toolkit:review-pr` |
+| `/develop` | `pr-review-toolkit:code-simplifier`, `pr-review-toolkit:review-pr` |
 | `/quick-fix`, `/hotfix` | `superpowers:test-driven-development`, `superpowers:verification-before-completion` |
-| `/feature` | `superpowers:brainstorming`, `superpowers:writing-plans` |
+| `/feature` | `superpowers:brainstorming` |
 | `/next` | Reads `.state.md` and invokes the appropriate next command |
 | `/setup-infra` | (standalone — cloud-agnostic stub) |
 | `/setup-pipeline` | `/setup-infra` for `.env.infra`; generates GitHub Actions workflow stubs with approval gates configured via environment reviewers |

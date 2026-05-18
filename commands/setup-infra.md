@@ -5,6 +5,8 @@ description: Generate a cloud-agnostic .env.infra template and a README document
 
 # /setup-infra — Cloud-agnostic env template
 
+> **Expert Voice:** Platform Engineer — scaffolds cloud-agnostic infrastructure configuration.
+
 Generates `.env.infra` (a placeholder env file) and `.env.infra.README.md` (a doc explaining what each variable is for and pointers to cloud-specific docs the user should consult). The user fills in the values for their cloud.
 
 This is intentionally cloud-agnostic for v1.0.0. Cloud-specific scaffolding (`--cloud=azure|aws|gcp`) is deferred to a future minor version.
